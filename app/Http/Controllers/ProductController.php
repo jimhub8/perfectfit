@@ -41,7 +41,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        // return $request->all();
         // return $request->categories['id'];
         if (Auth::guard('admin')->check()) {
             $seller_id = $request->seller_id;
