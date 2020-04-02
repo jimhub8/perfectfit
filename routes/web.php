@@ -24,8 +24,8 @@ Route::get('/cart_count', 'CartController@cart_count')->name('cart_count');
 Route::post('cash_delivery', 'PaymentController@cash_delivery')->name('cash_delivery');
 
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/admin/home', function () {
+    return redirect('/admin/dashboard');
 });
 Route::get('/', 'HomeController@perfectfit')->name('perfectfit');
 Route::get('/admin/dashboard', 'HomeController@index')->name('home');
