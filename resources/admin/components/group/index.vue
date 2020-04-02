@@ -148,7 +148,7 @@ export default {
                     type: 'success',
                     message: 'Delete completed'
                 });
-                this.getGroups();
+                // this.getGroups();
             });
         },
         openShow(data) {
@@ -172,7 +172,7 @@ export default {
                 .then(response => {
                     eventBus.$emit("alertRequest", "Updated");
                     this.checkedRows = [];
-                    this.getGroups();
+                    // this.getGroups();
                 });
         },
         selectionChanged(params) {
@@ -200,13 +200,10 @@ export default {
     mounted() {
         // this.$store.dispatch('getGroups');
         eventBus.$emit("LoadingEvent");
-        this.getGroups();
+        // this.getGroups();
     },
     created() {
-        eventBus.$on("groupEvent", data => {
-            this.getGroups();
-        });
-
+       
         eventBus.$on("responseChooseEvent", data => {
             console.log(data);
             if (data == "Excel") {

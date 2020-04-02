@@ -25,17 +25,19 @@ class SaleController extends Controller
      */
     public function index()
     {
-        return $sales = Sale::paginate(500);
+        $sales = Sale::with('user')->paginate(500);
         $sales->transform(function($sale) {
             $sale->discount = ($sale->discount != null) ? $sale->discount : 0;
             $total = 0;
             foreach ($sale->products as $product) {
                 $total += $product->price;
             }
+
+
             $sale->sub_total = $sale->sub_total;
             $sale->total = $sale->sub_total - $sale->discount;
-            $sale->client_name = $sale->client->name;
-            $sale->user_name = $sale->user->name;
+            // $sale->client = $sale->user;
+            // $sale->user_name = $sale->user->name;
             return $sale;
         });
         return $sales;

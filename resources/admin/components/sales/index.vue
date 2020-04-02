@@ -43,6 +43,11 @@
                                 <el-tag type="success">{{props.formattedRow.created_at}}</el-tag>
                             </span>
                         </span>
+                        <span v-else-if="props.column.field == 'order_no'">
+                            <span>
+                                <el-tag>{{ props.row.order_no }}</el-tag>
+                            </span>
+                        </span>
                         <span v-else-if="props.column.field == 'sub_total'">
                             <span>
                                 <el-tag type="info">{{ props.row.sub_total }}</el-tag>
@@ -103,20 +108,14 @@ export default {
                 update_list: 'updateSaleList'
             },
             checkedRows: [],
-            columns: [{
-                    label: "Created On",
-                    field: "created_at",
-                    // type: "date",
-                    // dateInputFormat: "YYYY-MM-DD",
-                    // dateOutputFormat: "Do MMMM YYYY"
+            columns: [
+                {
+                    label: "Order No",
+                    field: "order_no"
                 },
                 {
                     label: "Client Name",
-                    field: "client_name"
-                },
-                {
-                    label: "Created By",
-                    field: "user_name"
+                    field: "user.name"
                 },
                 {
                     label: "Sub total",
@@ -129,6 +128,13 @@ export default {
                 {
                     label: "Total",
                     field: "total"
+                },
+                {
+                    label: "Created On",
+                    field: "created_at",
+                    // type: "date",
+                    // dateInputFormat: "YYYY-MM-DD",
+                    // dateOutputFormat: "Do MMMM YYYY"
                 },
                 {
                     label: "Actions",

@@ -31,14 +31,14 @@
                         </div>
                     </router-link>
 
-                    <router-link to="/clients" class="v-list-item v-list-item--link theme--light">
+                    <!-- <router-link to="/clients" class="v-list-item v-list-item--link theme--light">
                         <div class="v-list__tile__action">
                             <v-icon>people_outline</v-icon>
                         </div>
                         <div class="v-list-item__content">
                             <div class="v-list-item__title">Clients</div>
                         </div>
-                    </router-link>
+                    </router-link> -->
 
                     <v-list-group prepend-icon="shopping_basket">
                         <template v-slot:activator>

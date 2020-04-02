@@ -3,6 +3,7 @@
 namespace App;
 
 use App\models\Billingaddress;
+use App\models\Sale;
 use App\models\Shippingaddress;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -60,5 +61,9 @@ class User extends Authenticatable
     public function shipping()
     {
         return $this->hasOne(Shippingaddress::class);
+    }
+    public function sale()
+    {
+        return $this->hasMany(Sale::class, 'client_id');
     }
 }

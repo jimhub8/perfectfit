@@ -122,6 +122,7 @@ export default {
                     data: this.form
                 }
             });
+            this.dialog = false
 
 
             // alert('oooo')

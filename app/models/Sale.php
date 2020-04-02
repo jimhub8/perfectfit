@@ -2,6 +2,7 @@
 
 namespace App\models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -18,15 +19,15 @@ class Sale extends Model
         // return $this->belongsToMany('App\models\Product')->using('App\models\ProductSale');
     }
 
-    public function client()
-    {
-        return $this->belongsTo('App\models\Client');
-    }
+    // public function client()
+    // {
+    //     return $this->belongsTo('App\models\Client');
+    // }
 
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class, 'client_id');
     }
     public function drawer()
     {

@@ -24,9 +24,6 @@ Route::get('/cart_count', 'CartController@cart_count')->name('cart_count');
 Route::post('cash_delivery', 'PaymentController@cash_delivery')->name('cash_delivery');
 
 
-Route::get('/admin/home', function () {
-    return redirect('/admin/dashboard');
-});
 Route::get('/', 'HomeController@perfectfit')->name('perfectfit');
 Route::get('/admin/dashboard', 'HomeController@index')->name('home');
 
@@ -59,20 +56,25 @@ Route::post('/search_menu/{search}', 'MenuController@search_menu')->name('search
 
 Route::post('/filter_products', 'ProductController@filter_products')->name('filter_products');
 
+Route::group(['middleware' => ['auth:admin']], function () {
 
-// Dashboard
-Route::any('user_count', 'DashboardController@user_count')->name('user_count');
-Route::any('school_count', 'DashboardController@school_count')->name('school_count');
-Route::any('week_sales_count', 'DashboardController@week_sales_count')->name('week_sales_count');
-Route::any('sellers_count', 'DashboardController@sellers_count')->name('sellers_count');
-Route::any('total_sales_count', 'DashboardController@total_sales_count')->name('total_sales_count');
+    // Route::get('/admin', function () {
+    //     return redirect('/admin/dashboard');
+    // });
+    // Dashboard
+    Route::any('user_count', 'DashboardController@user_count')->name('user_count');
+    Route::any('school_count', 'DashboardController@school_count')->name('school_count');
+    Route::any('week_sales_count', 'DashboardController@week_sales_count')->name('week_sales_count');
+    Route::any('sellers_count', 'DashboardController@sellers_count')->name('sellers_count');
+    Route::any('total_sales_count', 'DashboardController@total_sales_count')->name('total_sales_count');
 
-// Charts
-Route::any('schools_chart', 'DashboardController@schools_chart')->name('schools_chart');
-Route::any('sellers_chart', 'DashboardController@sellers_chart')->name('sellers_chart');
-Route::any('sales_chart', 'DashboardController@sales_chart')->name('sales_chart');
+    // Charts
+    Route::any('schools_chart', 'DashboardController@schools_chart')->name('schools_chart');
+    Route::any('sellers_chart', 'DashboardController@sellers_chart')->name('sellers_chart');
+    Route::any('sales_chart', 'DashboardController@sales_chart')->name('sales_chart');
 
 
 
-Route::resource('shipping', 'ShippingaddressController');
-Route::resource('billing', 'BillingaddressController');
+    Route::resource('shipping', 'ShippingaddressController');
+    Route::resource('billing', 'BillingaddressController');
+});
