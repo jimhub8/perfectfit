@@ -41,7 +41,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request->all();
+        return $request->all();
         // return $request->categories['id'];
         if (Auth::guard('admin')->check()) {
             $seller_id = $request->seller_id;
@@ -54,6 +54,7 @@ class ProductController extends Controller
         // $product->description = $request->description;
         $product->product_name = $request->product_name;
         $product->category_id = $request->categories['id'];
+        $product->school_id = $request->school_id;
         $product->user_id = $this->logged_user()->id;
         $product->seller_id = $seller_id;
         $sku_no = new AutoGenerate;
