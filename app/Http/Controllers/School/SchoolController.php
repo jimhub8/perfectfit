@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class SchoolController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('authCheck', ['except' => ['index', 'show', 'search_school']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

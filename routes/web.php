@@ -30,24 +30,19 @@ Route::get('/admin/dashboard', 'HomeController@index')->name('home');
 Auth::routes();
 
 
-
-Route::resource('users', 'UserController');
-Route::resource('roles', 'RoleController');
 Route::resource('products', 'ProductController');
-Route::resource('sales', 'SaleController');
-Route::resource('clients', 'ClientController');
 Route::resource('groups', 'GroupController');
-Route::resource('drawers', 'DrawerController');
-Route::resource('discounts', 'OfferController');
+// Route::resource('drawers', 'DrawerController');
+// Route::resource('discounts', 'OfferController');
 Route::resource('variants', 'VariantController');
 Route::resource('sku', 'SkuController');
 Route::resource('menu', 'MenuController');
 Route::resource('categories', 'CategoryController');
 Route::resource('subcategories', 'SubcategoryController');
 Route::resource('brands', 'BrandController');
-Route::resource('images', 'ImageController');
 Route::resource('slider', 'SliderController');
 Route::resource('currencies', 'CurrencyController');
+Route::resource('order_address', 'OrdershippingController');
 
 
 Route::post('/search_category/{search}', 'CategoryController@search_category')->name('search_category');
@@ -56,11 +51,17 @@ Route::post('/search_menu/{search}', 'MenuController@search_menu')->name('search
 
 Route::post('/filter_products', 'ProductController@filter_products')->name('filter_products');
 
-Route::group(['middleware' => ['auth:admin']], function () {
+Route::group(['middleware' => ['authCheck']], function () {
 
-    // Route::get('/admin', function () {
-    //     return redirect('/admin/dashboard');
-    // });
+
+    Route::resource('users', 'UserController');
+    Route::resource('roles', 'RoleController');
+    Route::resource('sales', 'SaleController');
+    Route::resource('clients', 'ClientController');
+    // Route::resource('images', 'ImageController');
+
+    Route::post('images/{id}', 'ImageController@images')->name('images');
+
     // Dashboard
     Route::any('user_count', 'DashboardController@user_count')->name('user_count');
     Route::any('school_count', 'DashboardController@school_count')->name('school_count');

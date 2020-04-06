@@ -30,11 +30,11 @@ class CartController extends Controller
         }
         // $product_name = ($request->product_name) ? $product->product_name;
         // Cart::add(['id' => $id, 'product' => $product, 'name' => $product['product_name'], 'quantity' => $request->order_qty, 'price' => $request->price]);
-        $sku_id = Sku::where('sku_no', $request->sku_no)->first('id');
-        $sku_id = $sku_id->id;
+        // $sku_id = Sku::where('sku_no', $request->sku_no)->first('id');
+        // $sku_id = $sku_id->id;
         // return $sku_id;
         Cart::add([
-            'id' => $sku_id,
+            'id' => $id,
             'name' => $product,
             'quantity' => $request->order_qty,
             'price' => $request->price,
@@ -48,8 +48,8 @@ class CartController extends Controller
     {
         // return $request->all();
 
-        $sku_id = Sku::where('sku_no', $request->name['sku_no'])->first('id');
-        $sku_id = $sku_id->id;
+        // $sku_id = Sku::where('sku_no', $request->name['sku_no'])->first('id');
+        // $sku_id = $sku_id->id;
 
         // return $sku_id;
 
@@ -70,11 +70,13 @@ class CartController extends Controller
     }
     public function getCart()
     {
+        // Cart::clear();
         $cart_d =  Cart::getContent();
         foreach ($cart_d as $cart) {
-            $sku = Sku::where('id', (int) $cart->id)->first('product_id');
-            // return $sku;
-            $products = Product::setEagerLoads([])->where('id', $sku->product_id)->get();
+            // $sku = Sku::where('id', (int) $cart->id)->first('product_id');
+            // // return $sku;
+            // dd($cart['id']);
+            $products = Product::setEagerLoads([])->where('id', $cart['id'])->get();
 
             $prod_tras = new ProductController;
             $prod_tras = $prod_tras->transform_product($products);

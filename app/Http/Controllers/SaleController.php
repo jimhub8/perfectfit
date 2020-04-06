@@ -174,21 +174,25 @@ class SaleController extends Controller
         }
         $sale->save();
         foreach ($carts as $cart) {
-            // dd($cart->name['seller_id']);
             $sku_id = Sku::where('sku_no', $cart->name['sku_no'])->first('id');
-            $sku_id = $sku_id->id;
+            // dd($sku_id['id']);
+            $sku_id = $sku_id['id'];
+            // if (!$sku_id) {
+            //     dd($sku_id, $cart);
+
+            // }
             $product_sale = new ProductSale;
             $product_sale->sale_id = $sale->id;
             $product_sale->product_id = $cart->name['id'];
             $product_sale->seller_id = $cart->name['seller_id'];
             $product_sale->sku_id = $sku_id;
             $product_sale->sku_no =  $cart->name['sku_no'];
-            $product_sale->price = $cart->name['price'];
+            $product_sale->price = $cart->price;
             $product_sale->quantity = $cart->quantity;
-            $product_sale->total_price = $cart->name['price'] * $cart->quantity;
+            $product_sale->total_price = $cart->price * $cart->quantity;
             $product_sale->save();
         }
-        return $sale;
+        return $sale->id;
     }
 
 

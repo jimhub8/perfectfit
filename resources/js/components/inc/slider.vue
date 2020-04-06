@@ -9,10 +9,10 @@
             <div id="wrapper">
                 <div class="slider-wrapper theme-default">
                     <div id="slider" class="nivoSlider">
-                        <img src="https://d29u17ylf1ylz9.cloudfront.net/bege-v2/images/slider/1.jpg" alt="test" title="#slider1" />
-                        <img src="https://d29u17ylf1ylz9.cloudfront.net/bege-v2/images/slider/2.jpg" title="#slider2" alt="test" />
-                        <img src="https://d29u17ylf1ylz9.cloudfront.net/bege-v2/images/slider/3.jpg" alt="test" data-transition="slideInLeft" />
-                        <img src="https://d29u17ylf1ylz9.cloudfront.net/bege-v2/images/slider/4.jpg" alt data-transition="slideInLeft" />
+                        <img src="/site/1.jpg" alt="test" title="#slider1" />
+                        <img src="/site/2.jpg" title="#slider2" alt="test" />
+                        <img src="/site/3.jpg" alt="test" data-transition="slideInLeft" />
+                        <img src="/site/4.jpg" alt data-transition="slideInLeft" />
 
                     </div>
 

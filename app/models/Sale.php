@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Sale extends Model
 {
     use SoftDeletes;
-    public $with = ['products'];
+    public $with = ['products', 'ordershipping'];
      /**
      * The users that belong to the role.
      */
@@ -32,6 +32,11 @@ class Sale extends Model
     public function drawer()
     {
         return $this->belongsTo('App\models\Drawer');
+    }
+
+    public function ordershipping()
+    {
+        return $this->hasOne(Ordershipping::class);
     }
 
 }

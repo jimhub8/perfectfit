@@ -1,6 +1,6 @@
 <template>
 <v-layout row justify-center>
-    <v-dialog v-model="dialog" persistent max-width="1400px">
+    <v-dialog v-model="dialog" persistent max-width="700px">
         <v-card v-if="dialog">
             <v-card-title fixed>
                 <v-spacer></v-spacer>
@@ -20,21 +20,20 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">Order No.</th>
                                 <th scope="col">Product</th>
-                                <!-- <th scope="col">Payment Id</th> -->
                                 <th scope="col">Price</th>
-                                <th scope="col">List Price</th>
                                 <th scope="col">Order Date</th>
-                                <!-- <th scope="col">Status</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="product in order.products" :key="product.id" >
-                                <th scope="row">1.</th>
+                            <tr v-for="(product, index) in order.products" :key="product.id" >
+                                <th scope="row">{{ index + 1 }}</th>
+                                <td>{{ order.order_no }}</td>
                                 <td>{{ product.product_name }}</td>
-                                <td class="badge" style="color: #fff; background: #f00;">{{ product.price }}</td>
+                                <td class="badge" style="color: #fff; background: #f00;">{{ product.pivot.price }}</td>
 
-                                <td>{{ carts.list_price }}</td>
+                                <!-- <td>{{ carts.list_price }}</td> -->
                                 <td>{{ carts.created_at }}</td>
                                 <!-- <td>{{ cart.status }}</td> -->
                             </tr>

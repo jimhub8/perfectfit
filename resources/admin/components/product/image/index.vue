@@ -87,7 +87,7 @@ export default {
     created() {
         eventBus.$on("openImageEvent", data => {
             // alert('dialog')
-            console.log(data);
+            // console.log(data);
 
             this.product = data;
             this.avatar = data.image;

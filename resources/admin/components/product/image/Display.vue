@@ -2,15 +2,17 @@
 <v-layout row justify-center>
     <v-container grid-list-md>
         <v-layout wrap>
-            <v-form ref="form" @submit.prevent>
+            <!-- <v-form ref="form" @submit.prevent>
                 <v-divider></v-divider>
                 <v-layout row>
                     <v-flex sm8>
-                        <img :src="avatar" style="width: 100%; height: 200px;">
-                        <v-btn color="red" darken-1 raised @click="onPickFile" style="color: #fff;">Update Image</v-btn>
-                        <input type="file" name="image" @change="Getimage" accept="image/*" style="display: none" ref="fileInput">
-                        <v-btn text @click="cancle" v-show="imagePlaced">Cancle</v-btn>
-                        <v-btn text @click="upload" :disabled="loading" :loading="loading">Update</v-btn>
+                        <v-card>
+                            <img :src="avatar" style="width: 100%; height: 200px;">
+                            <v-btn color="red" darken-1 raised @click="onPickFile" style="color: #fff;">Update Image</v-btn>
+                            <input type="file" name="image" @change="Getimage" accept="image/*" style="display: none" ref="fileInput">
+                            <v-btn text @click="cancle" v-show="imagePlaced">Cancle</v-btn>
+                            <v-btn text @click="upload" :disabled="loading" :loading="loading">Update</v-btn>
+                        </v-card>
                     </v-flex>
                     <v-flex sm3 offset-sm-1>
                         <div v-for="image in images" :key="image.id">
@@ -18,13 +20,28 @@
                             <small style="cursor: pointer; color: red;margin-bottom: 5px;" @click="remove(image.id)">remove</small>
                         </div>
                     </v-flex>
-                    <!-- <LightBox :images="images"></LightBox> -->
                 </v-layout>
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn :disabled="loading" :loading="loading" text color="primary" @click="submitFiles()" v-show="files.length">Submit</v-btn>
                 </v-card-actions>
-            </v-form>
+            </v-form> -->
+
+            <template>
+                <input type="file" name="image" @change="Getimage" accept="image/*" style="display: none" ref="fileInput">
+                <v-card class="mx-auto" max-width="400">
+                    <v-img class="white--text align-end" height="200px" :src="avatar">
+                        <v-card-actions>
+                            <v-btn color="red" darken-1 raised @click="onPickFile" style="color: #fff;">Update Image</v-btn>
+                            <v-spacer></v-spacer>
+                            <v-btn text @click="cancle" color="primary" v-show="imagePlaced">Cancle</v-btn>
+                        </v-card-actions>
+                    </v-img>
+                    <v-card-actions>
+                        <v-btn text @click="upload" :disabled="loading" :loading="loading">Update</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </template>
         </v-layout>
     </v-container>
 </v-layout>
@@ -104,7 +121,7 @@ export default {
             //     'id': this.product_id,
             // }
             axios
-                .patch(`/images/${this.product_id}`, this.file)
+                .post(`/images/${this.product_id}`, this.file)
                 .then(response => {
                     this.loading = false;
                     // console.log(response);
@@ -128,6 +145,8 @@ export default {
     created() {
 
         eventBus.$on("openImageEvent", data => {
+            console.log(data);
+
             this.product = data;
             this.avatar = data.image;
         });

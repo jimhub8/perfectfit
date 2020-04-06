@@ -58,11 +58,36 @@
                                             <el-tag type="success">{{ product.pivot.quantity * product.pivot.price }}</el-tag>
                                         </td>
                                     </tr>
+
                                 </tbody>
                                 <tfoot>
-                                        <td>Total</td>
-                                        <td colspan="5">{{ total }}</td>
+                                    <td>Total</td>
+                                    <td colspan="5">{{ total }}</td>
                                 </tfoot>
+                            </table>
+                            <VDivider />
+                            <span class="headline text-center" style="margin: auto;">Shipping Details</span>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Client Name</th>
+                                        <th scope="col">Client Email</th>
+                                        <th scope="col">Client Address</th>
+                                        <th scope="col">Client Phone</th>
+                                        <th scope="col">County</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ order_address.name }}</td>
+                                        <td>{{ order_address.email }}</td>
+                                        <td>{{ order_address.street_address }}</td>
+                                        <td>{{ order_address.phone }}</td>
+                                        <td>{{ order_address.county }}</td>
+
+                                    </tr>
+
+                                </tbody>
                             </table>
                         </v-flex>
                     </v-layout>
@@ -87,6 +112,7 @@ export default {
         eventBus.$on("openShowSale", data => {
             this.dialog = true;
             this.form = data;
+            this.getOrderAddress()
         });
     },
 
@@ -94,7 +120,17 @@ export default {
         close() {
             this.dialog = false;
         },
+
+        getOrderAddress() {
+            var payload = {
+                model: '/order_address',
+                update: 'updateOrderAddressList',
+                id: this.form.ordershipping.id,
+            }
+            this.$store.dispatch("showItem", payload);
+        },
     },
+
     computed: {
         total() {
             var price = 0
@@ -102,6 +138,9 @@ export default {
                 price += parseFloat(element.pivot.price) * parseFloat(element.pivot.quantity)
             });
             return price
+        },
+        order_address() {
+            return this.$store.getters.order_address
         }
     },
 };

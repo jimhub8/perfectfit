@@ -13,7 +13,7 @@
         <span>Cart</span>
     </v-tooltip>
     <section class="cart bgwhite p-t-70 p-b-100" v-show="!loader">
-        <div class="container">
+        <div class="container" v-if="carts.length > 0 || Object.keys(carts).length > 0">
             <!-- <div class="container" v-if="carts.length > 0"> -->
             <!-- Cart item -->
 
@@ -31,11 +31,11 @@
                         <tr class="table-row" v-for="cart in carts" :key="cart.id">
                             <td class="column-1">
                                 <div class="cart-img-product b-rad-4 o-f-hidden" @click="flashCart(cart)">
-                                    <img :src="cart.product.image" alt="">
+                                    <img style="width: 100px" :src="cart.product.image" alt="">
                                 </div>
                                 <div v-if="cart.attributes.length > 0">
                                     <div v-for="(attribute, index) in cart.attributes" :key="index">
-                                        <el-tag  v-for="(attr, key) in attribute" :key="key">{{ attr }}</el-tag>
+                                        <el-tag v-for="(attr, key) in attribute" :key="key">{{ attr }}</el-tag>
                                     </div>
                                 </div>
                             </td>
@@ -52,12 +52,14 @@
                                     </v-btn>
                                 </div>
                             </td>
-                            <td class="column-5">{{ cart.subtotal }}</td>
+                            <td class="column-5">{{ cart.price * cart.quantity }}</td>
                         </tr>
                     </table>
+
                 </div>
             </div>
-
+            <VDivider/>
+<!--
             <div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
                 <div class="flex-w flex-m w-full-sm">
                     <div class="size11 bo4 m-r-10">
@@ -66,12 +68,11 @@
                     </div>
 
                     <div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">
-                        <!-- Button -->
                         <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" @click="couponApply">Apply coupon</button>
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
             <!-- Total -->
             <div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
@@ -102,18 +103,10 @@
                 <button style="height: 44px;" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" @click="goToCheckout" v-if="checkout != 'checkout'">Proceed to Checkout</button>
             </div>
         </div>
-        <!-- <div v-else style="background: #f0f0f0;">
-            <p class="text-center" style="background: #f2dede; font-size: 13px; color: #a94442 !important;">Your hopping cart is empty!</p>
-            <v-list>
-                <router-link to="/shop" class="v-list__tile v-list__tile--link" style="width: 8%; margin: auto;">
-                    <div class="v-list__tile__content">
-                        <div class="v-list__tile__title">
-                            Go to Shop
-                        </div>
-                    </div>
-                </router-link>
-            </v-list>
-        </div> -->
+        <div v-else style="background: #f0f0f0;" class="text-center">
+            <p class="text-center" style="background: #f2dede; font-size: 13px; color: #a94442 !important;">Your shopping cart is empty!</p>
+            <router-link to="/" class="el-button el-button--primary is-plain">Go to Shop</router-link>
+        </div>
     </section>
 </div>
 </template>
@@ -192,6 +185,7 @@ export default {
         //     cart.order_qty = -1
         //     eventBus.$emit("updateCartEvent", cart)
         // },
+
         updateCart(cart, quantity) {
             console.log(cart);
 

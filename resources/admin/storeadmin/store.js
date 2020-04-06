@@ -15,7 +15,7 @@ export default {
         sellers: [],
         discount: [],
         sales: [],
-        groups: [],
+        order_address: [],
         drawers: [],
         discounts: [],
         clients: [],

@@ -47,7 +47,7 @@ class HomeController extends Controller
 
     public function perfectfit()
     {
-        if (Auth::check() || Auth::guard('seller')->check() || Auth::guard('web')->check()) {
+        if (Auth::check() || Auth::guard('seller')->check() || Auth::guard('admin')->check()) {
             if (Auth::guard('admin')->check()) {
                 $auth_user = Auth::guard('admin')->user();
                 $auth_user->is_admin = true;

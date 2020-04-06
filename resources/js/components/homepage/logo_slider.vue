@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="brand-carousel-active owl-carousel owl-loaded owl-drag">
-                      
+
                         <div class="owl-stage-outer">
                             <div class="owl-stage" style="transform: translate3d(-3110px, 0px, 0px); transition: all 0.25s ease 0s; width: 5054px;">
                                 <div class="owl-item cloned" style="width: 194.375px;">
@@ -140,7 +140,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="fa fa-angle-left"></i></button><button type="button" role="presentation" class="owl-next"><i class="fa fa-angle-right"></i></button></div>
+                        <div class="owl-nav">
+                            <button type="button" role="presentation" class="owl-prev"><i class="fa fa-angle-left"></i></button><button type="button" role="presentation" class="owl-next"><i class="fa fa-angle-right"></i></button></div>
                         <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button></div>
                     </div>
                 </div>

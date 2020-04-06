@@ -35,6 +35,10 @@ export default {
     updateSaleList(state, payload) {
         state.sales = payload
     },
+
+    updateOrderAddressList(state, payload) {
+        state.order_address = payload
+    },
     // Unique
     updateunique_sku(state, payload) {
         state.unique_sku = payload

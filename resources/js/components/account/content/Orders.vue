@@ -1,6 +1,14 @@
 <template>
 <v-app>
     <div>
+        <v-tooltip right>
+            <template v-slot:activator="{ on }">
+                <v-btn icon v-on="on" slot="activator" class="mx-0" @click="getOrders">
+                    <v-icon color="blue darken-2" small>refresh</v-icon>
+                </v-btn>
+            </template>
+            <span>Refresh</span>
+        </v-tooltip>
         <v-data-table :headers="headers" :items="sales.data" sort-by="calories" class="elevation-1">
             <template v-slot:item.actions="{ item }">
                 <v-tooltip right>

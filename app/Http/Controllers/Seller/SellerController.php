@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class SellerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('authCheck', ['except' => ['index', 'show', 'search']]);
+    }
+
     /**
      * Show the Seller dashboard.
      *

@@ -11,6 +11,15 @@ class ImageController extends Controller
 {
 
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        // $this->middleware('authCheck', ['except' => ['index', 'show', 'search_category']]);
+    }
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -19,7 +28,7 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $image_file = $request->all();
-        // dd($image_file);
+        dd($image_file);
         $image = new Image();
         $image->product_id = $request->id;
 
@@ -49,8 +58,9 @@ class ImageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return $request->image;
         $image_file = $request->all();
-        // dd($image_file);
+        dd($image_file);
         $image = new Image();
         $image->product_id = $id;
 
@@ -91,33 +101,37 @@ class ImageController extends Controller
     public function images(Request $request, $id)
     {
         $image_file = $request->all();
-        dd($image_file);
-        $image = Image::where('product_id', $id)->where('display', 1)->first();
-        if (!$image) {
-            $image = new Image();
-        }
-        if ($image) {
-            $image_display = Image::where('product_id', $id)->where('display', 1)->get();
-            foreach ($image_display as  $image_update) {
-                $image_update->display = false;
-                $image_update->save();
-            }
-        }
-        $image->product_id = $id;
+        // dd($image_file);
+        $image = new Image();
+
+
         if ($request->hasFile('image')) {
             $img = $request->image;
             if (File::exists($image->image)) {
-                // dd($image->image);
                 $image_path = $image->image;
                 File::delete($image_path);
             }
             $imagename = Storage::disk('public')->put('products', $img);
             $imgArr = explode('/', $imagename);
             $image_name = $imgArr[1];
-            $image->image = env('APP_URL') . '/storage/products/' . $image_name;
-            $image->display = true;
-            $image->save();
-            return $image;
+
+            $images_upload = Image::firstOrCreate(
+                [
+                    'display' => true,
+                    'product_id' => $id,
+                ],
+                [
+                    'image' => '/storage/products/' . $image_name
+                ]
+            );
+
+
+
+            // $image->display = true;
+            // $image->product_id = $id;
+            // $image->image = '/storage/products/' . $image_name;
+            // $image->save();
+            return $images_upload;
         }
         return 'error';
     }

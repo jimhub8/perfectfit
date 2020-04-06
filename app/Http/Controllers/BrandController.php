@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class BrandController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('authCheck', ['except' => ['index', 'show']]);
+    }
     public function logged_user()
     {
         $user = new User;

@@ -1,13 +1,13 @@
 <template>
 <v-app>
-    <el-dialog title="Warning" :visible.sync="dialog" width="60%" center :close-on-click-modal="false">
+    <el-dialog title="Follow these steps to filter uniform" :visible.sync="dialog" width="60%" center :close-on-click-modal="false">
         <v-stepper v-model="e1">
             <v-stepper-header>
-                <v-stepper-step :complete="e1 > 1" step="1">Name of step 1</v-stepper-step>
+                <v-stepper-step :complete="e1 > 1" step="1">School & Category</v-stepper-step>
                 <v-divider></v-divider>
-                <v-stepper-step :complete="e1 > 2" step="2">Name of step 2</v-stepper-step>
+                <v-stepper-step :complete="e1 > 2" step="2">Size</v-stepper-step>
                 <v-divider></v-divider>
-                <v-stepper-step step="3">Name of step 3</v-stepper-step>
+                <v-stepper-step step="3">Confirm</v-stepper-step>
             </v-stepper-header>
             <v-stepper-items>
                 <v-stepper-content step="1">
@@ -38,7 +38,6 @@
                     <v-btn color="primary" @click="e1 = 2">
                         Continue
                     </v-btn>
-                    <v-btn text>Cancel</v-btn>
                 </v-stepper-content>
                 <v-stepper-content step="2">
                     <v-card class="mb-5" color="white lighten-1">
@@ -67,7 +66,7 @@
                     <v-btn color="primary" @click="filterItems">
                         Finish
                     </v-btn>
-                    <v-btn text @click="e1 = 2">Cancel</v-btn>
+                    <v-btn text @click="e1 = 2">Back</v-btn>
                 </v-stepper-content>
             </v-stepper-items>
         </v-stepper>

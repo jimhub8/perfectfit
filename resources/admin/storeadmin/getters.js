@@ -33,8 +33,8 @@ export default {
     sellers(state) {
         return state.sellers
     },
-    suppliers(state) {
-        return state.suppliers
+    order_address(state) {
+        return state.order_address
     },
     customers(state) {
         return state.customers

@@ -23,7 +23,7 @@
                                                     <div class="product-image">
                                                         <a href>
                                                             <span class="onsale">Sale!</span>
-                                                            <img src="https://d29u17ylf1ylz9.cloudfront.net/bege-v2/https://d29u17ylf1ylz9.cloudfront.net/bege-v2/images/product/big/product4.jpg" alt />
+                                                            <img src="/site/4.jpg" alt />
                                                         </a>
                                                         <div class="quickviewbtn">
                                                             <a href="#" data-toggle="modal" data-target="#product_modal" data-original-title="Quick View">
@@ -97,7 +97,7 @@
                                                 <div class="list-col4">
                                                     <div class="product-image">
                                                         <a href>
-                                                            <img src="https://d29u17ylf1ylz9.cloudfront.net/bege-v2/https://d29u17ylf1ylz9.cloudfront.net/bege-v2/images/product/big/product5.jpg" alt />
+                                                            <img src="/site/5.jpg" alt />
                                                         </a>
                                                         <div class="quickviewbtn">
                                                             <a href="#" data-toggle="modal" data-target="#product_modal" data-original-title="Quick View">
@@ -138,7 +138,7 @@
                                                             <div data-countdown="2019/08/02">
                                                                 <span class="cdown days">
                                                                     <span class="time-count">0</span>
-                                                                    <span>D :</span>
+                                                                     <span>D :</span>
                                                                 </span>
                                                                 <span class="cdown hour">
                                                                     <span class="time-count">0</span>
@@ -171,7 +171,7 @@
                                                 <div class="list-col4">
                                                     <div class="product-image">
                                                         <a href="#">
-                                                            <img src="https://d29u17ylf1ylz9.cloudfront.net/bege-v2/images/product/big/product4.jpg" alt />
+                                                            <img src="/site/4.jpg" alt />
                                                         </a>
                                                         <div class="quickviewbtn">
                                                             <a href="#" data-toggle="modal" data-target="#product_modal" data-original-title="Quick View">
@@ -246,7 +246,7 @@
                                                     <div class="product-image">
                                                         <a href>
                                                             <span class="onsale">Sale!</span>
-                                                            <img src="https://d29u17ylf1ylz9.cloudfront.net/bege-v2/images/product/big/product5.jpg" alt />
+                                                            <img src="/site/5.jpg" alt />
                                                         </a>
                                                         <div class="quickviewbtn">
                                                             <a href="#" data-toggle="modal" data-target="#product_modal" data-original-title="Quick View">
@@ -394,7 +394,7 @@
                                                 <div class="list-col4">
                                                     <div class="product-image">
                                                         <a href="#">
-                                                            <img src="https://d29u17ylf1ylz9.cloudfront.net/bege-v2/https://d29u17ylf1ylz9.cloudfront.net/bege-v2/images/product/big/product4.jpg" alt />
+                                                            <img src="/site/4.jpg" alt />
                                                         </a>
                                                         <div class="quickviewbtn">
                                                             <a href="#" data-toggle="modal" data-target="#product_modal" data-original-title="Quick View">
@@ -469,7 +469,7 @@
                                                     <div class="product-image">
                                                         <a href>
                                                             <span class="onsale">Sale!</span>
-                                                            <img src="https://d29u17ylf1ylz9.cloudfront.net/bege-v2/images/product/big/product5.jpg" alt />
+                                                            <img src="/site/5.jpg" alt />
                                                         </a>
                                                         <div class="quickviewbtn">
                                                             <a href="#" data-toggle="modal" data-target="#product_modal" data-original-title="Quick View">
@@ -538,10 +538,10 @@
                             </div>
                         </div>
                         <div class="owl-nav">
-                            <button type="button" role="presentation" class="owl-prev">
+                            <button type="button" role="presentation" class="owl-prev" style="position: absolute">
                                 <i class="fa fa-angle-left"></i>
                             </button>
-                            <button type="button" role="presentation" class="owl-next">
+                            <button type="button" role="presentation" class="owl-next" style="position: absolute">
                                 <i class="fa fa-angle-right"></i>
                             </button>
                         </div>

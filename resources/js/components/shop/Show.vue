@@ -72,37 +72,18 @@ export default {
                 this.showError = true;
                 this.error_msg = "Quantity must be greater than 1";
             } else {
+                var cart = this.productD
+                cart.order_qty = this.form.quantity
+                eventBus.$emit("addCartEvent", cart);
+                // this.productD.order_qty = this.form.quantity
+                // var payload = {
+                //     model: 'cartAdd',
+                //     id: this.productD.id,
+                //     data: this.productD,
+                // }
 
-                this.productD.order_qty = this.form.quantity
-                var payload = {
-                    model: 'cartAdd',
-                    id: this.productD.id,
-                    data: this.productD,
-                }
+                // this.$store.dispatch('postItem', payload)
 
-                this.$store.dispatch('postItem', payload)
-
-                // eventBus.$emit("loadingRequest");
-                // this.showError = false;
-                // axios
-                //     .post(`/cartAdd/${this.productD.id}`, this.$data.form)
-                //     .then(response => {
-                //         this.loading = false;
-                //         if (response.data.errors) {
-                //             eventBus.$emit("errorRequest", response.data.errors);
-                //             return (this.err_ms = response.data.errors);
-                //         } else {
-                //             eventBus.$emit("alertRequest", "Cart Added");
-                //             eventBus.$emit("cartEvent", response.data);
-                //         }
-                //         // this.close();
-                //         // this.resetForm();
-                //         // this.$parent.brands.push(response.data)
-                //     })
-                //     .catch(error => {
-                //         this.loading = false;
-                //         this.errors = error.response.data.errors;
-                //     });
             }
             // this.loading = true
         },

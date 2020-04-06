@@ -1,5 +1,5 @@
 <template>
-<div class="col-xs-12 col-md-9 shop-content">
+<div class="col-xs-12 col-md-12 shop-content">
     <div class="shop-banner">
         <img src="https://d29u17ylf1ylz9.cloudfront.net/bege-v2/images/banner/shop-category.jpg" alt="">
     </div>
@@ -50,7 +50,7 @@
                                 <div class="list-col4">
                                     <div class="product-image">
                                         <a href="">
-                                            <img src="https://d29u17ylf1ylz9.cloudfront.net/bege-v2/images/product/1.jpg" alt="">
+                                            <img :src="product.image" alt="">
                                         </a>
                                         <div class="quickviewbtn">
                                             <v-btn text icon style="color:white" @click="showItem(product)">
@@ -68,7 +68,7 @@
                                     </div>
                                     <div class="product-hidden">
                                         <div class="add-to-cart">
-                                            <a  @click="addToCart(product)">Add to cart</a>
+                                            <a  @click="addToCart(product)" style="cursor: pointer;">Add to cart</a>
                                             <!-- <v-btn color="primary" @click="addToCart(product)">Add to cart</v-btn> -->
                                         </div>
                                         <div class="star-actions">

@@ -12,6 +12,11 @@ import ElementUI from 'element-ui';
 import vuetify from './vuetify'
 import locale from 'element-ui/lib/locale/lang/en'
 import 'element-ui/lib/theme-chalk/index.css';
+
+import vueTopprogress from 'vue-top-progress'
+
+Vue.use(vueTopprogress)
+ 
 Vue.use(ElementUI, { locale });
 
 import VueYouTubeEmbed from 'vue-youtube-embed'

@@ -7,8 +7,8 @@
             </v-btn>
             <span>Cart</span>
         </v-tooltip>
-        <div class="container">
-            <!-- Cart item -->
+        <div class="container" v-if="carts.length > 0 || Object.keys(carts).length > 0">
+                <!-- Cart item -->
 
             <div class="container-table-cart pos-relative">
                 <div class="wrap-table-shopping-cart bgwhite">
@@ -24,7 +24,7 @@
                         <tr class="table-row" v-for="cart in carts" :key="cart.id">
                             <td class="column-1">
                                 <div class="cart-img-product b-rad-4 o-f-hidden" @click="flashCart(cart)">
-                                    <img :src="cart.name.image" alt="">
+                                    <img style="width: 70px" :src="cart.name.image" alt="">
                                 </div>
                             </td>
                             <td class="column-2">{{ cart.name.product_name }}</td>
@@ -40,12 +40,15 @@
                                     </v-btn>
                                 </div>
                             </td>
-                            <td class="column-5">{{ cart_total }}</td>
+                            <td class="column-5">{{ cart.price * cart.quantity }}</td>
                         </tr>
+
                     </table>
+
                 </div>
             </div>
-
+            <VDivider/>
+<!--
             <div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
                 <div class="flex-w flex-m w-full-sm">
                     <div class="size11 bo4 m-r-10">
@@ -54,12 +57,11 @@
                     </div>
 
                     <div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">
-                        <!-- Button -->
                         <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" @click="couponApply">Apply coupon</button>
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
             <!-- Total -->
             <div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
@@ -96,18 +98,10 @@
                 </div>
             </div>
         </div>
-        <!-- <div v-else style="background: #f0f0f0;">
+       <div v-else style="background: #f0f0f0;" class="text-center">
             <p class="text-center" style="background: #f2dede; font-size: 13px; color: #a94442 !important;">Your shopping cart is empty!</p>
-            <v-list>
-                <router-link to="/shop" class="v-list__tile v-list__tile--link" style="width: 8%; margin: auto;">
-                    <div class="v-list__tile__content">
-                        <div class="v-list__tile__title">
-                            Go to Shop
-                        </div>
-                    </div>
-                </router-link>
-            </v-list>
-        </div> -->
+            <router-link to="/" class="el-button el-button--primary is-plain">Go to Shop</router-link>
+        </div>
     </section>
 </div>
 </template>
@@ -120,8 +114,6 @@ export default {
             csrf: document
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"),
-            carts: [],
-            cart_total: null,
             loader: false,
             totalCoupon: 0,
             totalPrice: 0,
@@ -140,68 +132,51 @@ export default {
     },
     methods: {
         getCart() {
-            axios.get("/getCart").then(response => {
-                eventBus.$emit("StoprogEvent");
-                this.carts = response.data;
-                this.loader = false;
-                eventBus.$emit("cartEvent", response.data);
-            });
+            var payload = {
+                model: 'getCart',
+                update_list: 'updateCartsList',
+            }
+            this.$store.dispatch('getItems', payload)
         },
-        cash_delivery() {
-            eventBus.$emit("progressEvent");
-            this.account.total = parseInt(this.getSubTotal) - parseInt(this.getCouponT)
-            axios.post('cash_delivery', this.account)
-                .then(response => {
-                    eventBus.$emit("StoprogEvent");
-                    eventBus.$emit("cartEvent", response.data);
-                    eventBus.$emit("alertRequest", "Order placed");
-                    // this.goToCheckout()
-                    // this.carts = response.data;
-                    // this.message = "added";
-                    // this.snackbar = true;
-                })
-                .catch(error => {
-                    eventBus.$emit("StoprogEvent");
-                    this.loading = false;
-                    this.errors = error.response.data.errors;
-                });
-        },
-        goToCheckout() {
+
+        goToThankyou() {
             this.$router.push({
                 name: "thankyou"
             });
         },
+        cash_delivery() {
+            
+            eventBus.$emit("progressEvent");
+            var payload = {
+                model: "cash_delivery",
+                data: this.account
+            };
+            this.$store.dispatch("postItems", payload).then(res => {
+                // eventBus.$emit("StoprogEvent");
+                eventBus.$emit("cartEvent");
+                eventBus.$emit("SuccessEvent", "Cograts, Order placed");
+                eventBus.$emit("StoprogEvent");
+                // this.goToThankyou()
+            });
+        },
         get_cart_total() {
-            axios.get('cart_total')
-                .then(response => {
-                    this.cart_total = response.data
-                })
-                .catch(error => {
-                    this.errors = error.response.data.errors;
-                });
+
+            var payload = {
+                model: 'cart_total',
+                update_list: 'updateCartTotalList',
+            }
+            this.$store.dispatch('getItems', payload)
         },
         flashCart(cart) {
-            console.log(cart);
             eventBus.$emit("progressEvent");
-            // eventBus.$emit("loadingRequest");
-            axios
-                .post('/flashCart', cart)
-                .then(response => {
-                    eventBus.$emit("StoprogEvent");
-                    eventBus.$emit("cartEvent", response.data);
-                    eventBus.$emit("alertRequest", "Item Removed");
-                    this.carts = response.data;
-                    // this.message = "added";
-                    // this.snackbar = true;
-                })
-                .catch(error => {
-                    eventBus.$emit("StoprogEvent");
-                    this.loading = false;
-                    this.errors = error.response.data.errors;
-                });
+            var payload = {
+                model: 'flashCart',
+                update_list: 'updateCartsList',
+            }
+            this.$store.dispatch('getItems', payload)
         },
         updateCart(cart, quantity) {
-            console.log(cart);
+            // console.log(cart);
             cart.order_qty = quantity
             // cart.order_qty = cart
             eventBus.$emit("updateCartEvent", cart)
@@ -277,47 +252,13 @@ export default {
         });
     },
     computed: {
-        getSubTotal() {
-            if (this.carts.length > 0) {
-                this.totalPrice = 0;
-                for (let index = 0; index < this.carts.length; index++) {
-                    const element = this.carts[index];
-                    this.totalPrice = parseInt(element.price) + this.totalPrice;
-                }
-            }
-            return this.totalPrice;
-        },
-        getTotal() {
-            if (this.carts.length > 0) {
-                return parseInt(this.getSubTotal) - this.discount;
-            }
-        },
-        getCouponT() {
-            if (this.couponSessin.length > 0) {
-                this.totalCoupon = 0;
-                for (let index = 0; index < this.couponSessin.length; index++) {
-                    const element = this.couponSessin[index];
-                    if (element.disc_type === "percentage") {
-                        this.totalCoupon += (this.getSubTotal * element.amount) / 100;
-                        console.log(this.totalCoupon);
 
-                    } else if (element.disc_type === "fixedCart") {
-                        this.totalCoupon = (this.totalCoupon + element.amount);
-                        console.log('this.totalCoupon');
-                        // this.finalAmount = this.getTotal - this.totalCoupon;
-                    }
-                    //  else if (element.disc_type === "productDisc") {
-                    //   this.totalCoupon = parseInt(element.amount) + this.totalCoupon;
-                    // }
-                    else {
-                        this.totalCoupon = parseInt(element.amount) + this.totalCoupon;
-                    }
-                }
-                return this.totalCoupon;
-            } else {
-                return this.totalCoupon;
-            }
-        }
+        carts() {
+            return this.$store.getters.carts
+        },
+        cart_total() {
+            return this.$store.getters.cart_total
+        },
     }
 };
 </script>

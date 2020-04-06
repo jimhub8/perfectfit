@@ -15,6 +15,16 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('authCheck', ['except' => ['index', 'show', 'product_image', 'filter_products', 'product_search']]);
+    }
+
     public function logged_user()
     {
         $user = new User();
@@ -169,6 +179,14 @@ class ProductController extends Controller
                 $product->quantity = $product->skus->quantity;
             }
 
+            $images = $product->images;
+            foreach ($images as $image) {
+                if ($image['display']) {
+                    $product->image = ($image['image']);
+
+                }
+            }
+
             // foreach ($product->images as  $pro_image) {
             //     if ($pro_image->display) {
             //         $product->image = $pro_image->image;
@@ -265,6 +283,6 @@ class ProductController extends Controller
         }
 
         $product = Product::whereIn('category_id', $category_id)->where('school_id', $school)->paginate();
-       return  $this->transform_product($product);
+        return  $this->transform_product($product);
     }
 }

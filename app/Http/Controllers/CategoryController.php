@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('authCheck', ['except' => ['index', 'show', 'search_category']]);
+    }
+
+
     public function logged_user()
     {
         $user = new User();
