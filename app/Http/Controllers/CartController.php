@@ -5,44 +5,68 @@ namespace App\Http\Controllers;
 use App\models\CouponSession;
 use App\models\Product;
 use App\models\ProductAttribute;
-use App\models\Sku;
 use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-    public function cartAdd(Request $request, $id)
+    public function cartAdd(Request $request)
     {
-        // return $request->all();
+
+
+        // Cart::add('293ad', 'Product 1', 1, 9.99);
+
         // Cart::clear();
-        $product = $request->all();
-        // return $product['sku_no'];
-        // return ['id' => $id, 'product' => $product, 'name' => $product['product_name'], 'quantity' => $request->order_qty, 'price' => $request->price];
-        $product['skus'] = null;
-        $product['product_variants'] = null;
-        $product['categories'] = null;
-        $product['images'] = null;
-        // return $product;
-        // $product = Product::setEagerLoads([])->find($id);
-        if (!$request->price) {
-            $request->price = 0;
+        // return $request->all();
+        $size = $request->size;
+        $menu_id = $request->menus['id'];
+        $school_id = (!empty($request->school)) ? $request->school['id'] : null;
+        $categories = $request->category_new;
+
+        foreach ($categories as  $category) {
+            $id = substr(md5(microtime()), 0, 10);
+
+            // dd([
+            //     'id' => rand(100000, 100000000),
+            //     'name' => $category['category'],
+            //     'quantity' => (int) $category['quantity'],
+            //     'price' => 100,
+            // ]);
+            Cart::add([
+                'id' => $category['category'],
+                'name' => $category['category'],
+                'quantity' => (int) $category['quantity'],
+                'price' => 100,
+                'attributes' => [
+                    'size' => $category['size'],
+                    'school_id' => $school_id,
+                    'menu_id' => $menu_id,
+                ]
+            ]);
         }
-        // $product_name = ($request->product_name) ? $product->product_name;
-        // Cart::add(['id' => $id, 'product' => $product, 'name' => $product['product_name'], 'quantity' => $request->order_qty, 'price' => $request->price]);
-        // $sku_id = Sku::where('sku_no', $request->sku_no)->first('id');
-        // $sku_id = $sku_id->id;
-        // return $sku_id;
-        Cart::add([
-            'id' => $id,
-            'name' => $product,
-            'quantity' => $request->order_qty,
-            'price' => $request->price,
-            // // 'product_i' => ['test'],
-            // 'attributes' => array( // attributes field is optional
-            //     $request->choices
-            // )
-        ]);
+
+
+
+        return;
+
+
+        // Cart::clear();
+        // $id = 1;
+        // $product = $request->all();
+        // $product['skus'] = null;
+        // $product['product_variants'] = null;
+        // $product['categories'] = null;
+        // $product['images'] = null;
+        // if (!$request->price) {
+        //     $request->price = 0;
+        // }
+        // Cart::add([
+        //     'id' => $id,
+        //     'name' => $product,
+        //     'quantity' => $request->order_qty,
+        //     'price' => $request->price,
+        // ]);
     }
     public function update_cart(Request $request, $id)
     {
@@ -71,7 +95,7 @@ class CartController extends Controller
     public function getCart()
     {
         // Cart::clear();
-        $cart_d =  Cart::getContent();
+        return $cart_d =  Cart::getContent();
         foreach ($cart_d as $cart) {
             // $sku = Sku::where('id', (int) $cart->id)->first('product_id');
             // // return $sku;

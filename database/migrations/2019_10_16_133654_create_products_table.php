@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('product_name')->nullable();
             $table->string('sku_no')->nullable();
             $table->string('bar_code')->nullable();
+            $table->boolean('active')->default(0);
             $table->unsignedBigInteger('school_id');
             $table->unsignedBigInteger('seller_id');
             $table->unsignedBigInteger('category_id');

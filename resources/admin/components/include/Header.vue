@@ -103,14 +103,14 @@
                             <div class="v-list-item__title">Vendors</div>
                         </div>
                     </router-link>
-                    <router-link to="/discount" class="v-list-item v-list-item--link theme--light">
+                    <!-- <router-link to="/discount" class="v-list-item v-list-item--link theme--light">
                         <div class="v-list__tile__action">
                             <v-icon>indeterminate_check_box</v-icon>
                         </div>
                         <div class="v-list-item__content">
                             <div class="v-list-item__title">Discounts</div>
                         </div>
-                    </router-link>
+                    </router-link> -->
                     <v-list-group prepend-icon="account_circle">
                         <template v-slot:activator>
                             <v-list-item-title>Users</v-list-item-title>
@@ -133,7 +133,7 @@
                         </router-link>
                     </v-list-group>
 
-                    <v-list-group prepend-icon="settings">
+                    <!-- <v-list-group prepend-icon="settings">
                         <template v-slot:activator>
                             <v-list-item-title>Settings</v-list-item-title>
                         </template>
@@ -153,7 +153,7 @@
                                 <div class="v-list-item__title">Product options</div>
                             </div>
                         </router-link>
-                    </v-list-group>
+                    </v-list-group> -->
                 </v-card>
             </template>
         </v-list>

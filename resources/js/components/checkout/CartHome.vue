@@ -24,10 +24,10 @@
                         <tr class="table-row" v-for="cart in carts" :key="cart.id">
                             <td class="column-1">
                                 <div class="cart-img-product b-rad-4 o-f-hidden" @click="flashCart(cart)">
-                                    <img style="width: 70px" :src="cart.name.image" alt="">
+                                    <!-- <img style="width: 70px" :src="cart.name.image" alt=""> -->
                                 </div>
                             </td>
-                            <td class="column-2">{{ cart.name.product_name }}</td>
+                            <td class="column-2">{{ cart.name }}</td>
                             <td class="column-3">{{ cart.name.price }}</td>
                             <td class="column-4">
                                 <div class="flex-w bo5 of-hidden w-size17">
@@ -145,7 +145,7 @@ export default {
             });
         },
         cash_delivery() {
-            
+
             eventBus.$emit("progressEvent");
             var payload = {
                 model: "cash_delivery",

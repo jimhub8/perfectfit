@@ -18,24 +18,8 @@
                     <el-input placeholder="Barcode" v-model="product.bar_code"></el-input>
                 </v-flex>
                 <v-flex xs4 sm5 offset-sm1 style="padding: 7px 0;">
-                    <label for="" style="color: #52627d;">Length(in)</label>
-                    <el-input placeholder="Length(in)" min="0" type="number" v-model="product.length"></el-input>
-                </v-flex>
-                <v-flex xs4 sm5 offset-sm1 style="padding: 7px 0;">
-                    <label for="" style="color: #52627d;">Width(in)</label>
-                    <el-input placeholder="Width(in)" min="0" type="number" v-model="product.width"></el-input>
-                </v-flex>
-                <v-flex xs4 sm5 offset-sm1 style="padding: 7px 0;">
-                    <label for="" style="color: #52627d;">Height(in)</label>
-                    <el-input placeholder="Height(in)" min="0" type="number" v-model="product.height"></el-input>
-                </v-flex>
-                <v-flex xs12 sm5 offset-sm1 style="padding: 7px 0;">
-                    <label for="" style="color: #52627d;">Weight({{ product.measure }})</label>
-                    <el-input placeholder="Weight" min="0" type="number" v-model="product.weight"></el-input>
-                    <el-select v-model="product.measure" clearable placeholder="Select Measure" style="margin-top: 10px">
-                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                        </el-option>
-                    </el-select>
+                    <label for="" style="color: #52627d;">Size</label>
+                    <el-input placeholder="32" min="0" type="number" v-model="product.size"></el-input>
                 </v-flex>
             </v-layout>
         </v-flex>

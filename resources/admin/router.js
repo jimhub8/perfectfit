@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 
 import myDashboard from './components/dashboard'
 import myUsers from './components/users'
-import MyRoles from './components/users/roles/Roles'
+import MyRoles from './components/users/roles'
 import myProducts from './components/product'
 import myClients from './components/clients'
 import mySchools from './components/schools'

@@ -19,38 +19,20 @@ class PaymentController extends Controller
         $shippingaddress = Shippingaddress::firstOrCreate(
             ['user_id' => Auth::id()],
             [
-                'name' => (array_key_exists('name', $address)) ?$address['name'] : null,
-                'street_address' => (array_key_exists('street_address', $address)) ?$address['street_address'] : null,
-                'town' => (array_key_exists('town', $address)) ? $address['town'] : $address['county'] ,
-                'country' => (array_key_exists('country', $address)) ?$address['country'] : null,
-                'county' => (array_key_exists('county', $address)) ?$address['county'] : null,
-                'postal_code' => (array_key_exists('postal_code', $address)) ?$address['postal_code'] : null,
-                'phone' => (array_key_exists('phone', $address)) ?$address['phone'] : null,
-                'email' => (array_key_exists('email', $address)) ?$address['email'] : null,
+                'name' => (array_key_exists('name', $address)) ? $address['name'] : null,
+                'street_address' => (array_key_exists('street_address', $address)) ? $address['street_address'] : null,
+                'town' => (array_key_exists('town', $address)) ? $address['town'] : $address['county'],
+                'country' => (array_key_exists('country', $address)) ? $address['country'] : null,
+                'county' => (array_key_exists('county', $address)) ? $address['county'] : null,
+                'postal_code' => (array_key_exists('postal_code', $address)) ? $address['postal_code'] : null,
+                'phone' => (array_key_exists('phone', $address)) ? $address['phone'] : null,
+                'email' => (array_key_exists('email', $address)) ? $address['email'] : null,
             ]
         );
         return $shippingaddress->id;
     }
 
 
-    public function shipping_2($address)
-    {
-        dd('swdw');
-        $shippingaddress = Shippingaddress::firstOrCreate(
-            ['user_id' => Auth::id()],
-            [
-                'name' => $address->name,
-                'street_address' => $address->street_address,
-                'town' => $address->town,
-                'country' => $address->country,
-                'county' => $address->county,
-                'postal_code' => $address->postal_code,
-                'phone' => $address->phone,
-                'email' => $address->email,
-            ]
-        );
-        return $shippingaddress->id;
-    }
 
     public function cash_delivery(Request $request)
     {

@@ -22,7 +22,7 @@ class ProductController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('authCheck', ['except' => ['index', 'show', 'product_image', 'filter_products', 'product_search']]);
+        // $this->middleware('authCheck', ['except' => ['index', 'show', 'product_image', 'filter_products', 'product_search']]);
     }
 
     public function logged_user()
@@ -39,7 +39,7 @@ class ProductController extends Controller
     {
         // return Product::all();
         // return $products = Product::paginate(10);
-        $products = Product::with('images')->paginate(10);
+        $products = Product::paginate(4);
         return $this->transform_product($products);
     }
 
@@ -69,6 +69,8 @@ class ProductController extends Controller
         $product->seller_id = $seller_id;
         $sku_no = new AutoGenerate;
         $product->sku_no = $sku_no->product_sku();
+        $product->size = $request->size;
+        $product->active = false;
         $product->save();
     }
 
@@ -98,18 +100,19 @@ class ProductController extends Controller
         $sku_values = $request->sku_values;
         $product = $request->product;
         // return $request->product['subcategories'];
-        Sku::updateOrCreate(
+        return Sku::updateOrCreate(
             [
                 'sku_no' => $product['sku_no'],
             ],
             [
+                'description' => ($sku_values['description']) ? $sku_values['description'] : $product['description'],
+                'size' => ($sku_values['size']) ? $sku_values['size'] : $product['size'],
                 'price' => $sku_values['price'],
                 'quantity' => $sku_values['quantity'],
                 'product_id' => $id,
                 'reorder_point' => $sku_values['reorder_point'],
             ]
         );
-
         // $relation = new VariantController;
         // $update_product = Product::find($id);
         // $this->menu_fun($request->product['menus'], $update_product);
@@ -177,13 +180,14 @@ class ProductController extends Controller
             if (!empty($product->skus)) {
                 $product->price = $product->skus->price;
                 $product->quantity = $product->skus->quantity;
+                $product->size = $product->skus->size;
+                $product->description = $product->skus->description;
             }
 
             $images = $product->images;
             foreach ($images as $image) {
                 if ($image['display']) {
                     $product->image = ($image['image']);
-
                 }
             }
 
@@ -196,7 +200,6 @@ class ProductController extends Controller
         });
         return $products;
     }
-
 
     public function product_table()
     {

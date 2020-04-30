@@ -57,6 +57,14 @@
                             </v-tooltip>
                             <v-tooltip bottom>
                                 <template v-slot:activator="{ on }">
+                                    <v-btn v-on="on" icon class="mx-0" @click="openImage(props.row)" slot="activator">
+                                        <v-icon small color="blue darken-2">image</v-icon>
+                                    </v-btn>
+                                </template>
+                                <span>Upload image</span>
+                            </v-tooltip>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on }">
                                     <v-btn icon v-on="on" class="mx-0" @click="confirm_delete(props.row)" slot="activator">
                                         <v-icon small color="pink darken-2">delete</v-icon>
                                     </v-btn>
@@ -72,18 +80,20 @@
     </v-container>
     <Create></Create>
     <Edit></Edit>
+    <myImage />
 </v-content>
 </template>
 
 <script>
 import Create from "./create";
 import Edit from "./edit";
+import myImage from "./image";
 
 export default {
     props: ['user'],
     components: {
         Create,
-        Edit,
+        Edit, myImage
     },
     data() {
         return {
@@ -135,6 +145,9 @@ export default {
         },
         openEdit(data) {
             eventBus.$emit("openEditMenu", data);
+        },
+        openImage(data) {
+            eventBus.$emit("openCatImageEvent", data);
         },
 
         confirm_delete(item) {

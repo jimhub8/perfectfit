@@ -35,7 +35,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Product Name</th>
-                                        <th scope="col">Product Sku no.</th>
+                                        <!-- <th scope="col">Product Sku no.</th> -->
                                         <th scope="col">Product Description</th>
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Price</th>
@@ -43,10 +43,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(product, index) in form.products" :key="index">
+                                    <tr v-for="(product, index) in form.categories" :key="index">
                                         <th scope="row">{{ index+1 }}</th>
-                                        <td>{{ product.product_name }}</td>
-                                        <td>{{ product.sku_no }}</td>
+                                        <td>{{ product.category }}</td>
+                                        <!-- <td>{{ product.sku_no }}</td> -->
                                         <td>{{ product.description }}</td>
                                         <td>
                                             <el-tag type="danger">{{ product.pivot.quantity }}</el-tag>
@@ -125,7 +125,7 @@ export default {
             var payload = {
                 model: '/order_address',
                 update: 'updateOrderAddressList',
-                id: this.form.ordershipping.id,
+                id: this.form.ordershipping.shippingaddress_id,
             }
             this.$store.dispatch("showItem", payload);
         },
@@ -134,7 +134,7 @@ export default {
     computed: {
         total() {
             var price = 0
-            this.form.products.forEach(element => {
+            this.form.categories.forEach(element => {
                 price += parseFloat(element.pivot.price) * parseFloat(element.pivot.quantity)
             });
             return price

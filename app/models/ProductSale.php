@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductSale extends Model
 {
-    protected $table = 'product_sale';
-    
+    protected $table = 'category_sale';
+
     public function seller()
     {
         return $this->hasOne(Seller::class);

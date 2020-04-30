@@ -42,6 +42,18 @@
                 </form>
             </div>
         </VCard>
+        <VCard style="padding: 20px;width: 80%; margin: auto;box-shadow: 7px 7px 8px -4px rgb(210, 225, 246),0 12px 17px 2px rgb(210, 225, 246),0 5px 22px 4px rgb(210, 225, 246) !important;" v-else>
+            <div class="text-center">
+                <v-card-text>
+
+                    <p>You are not logged! Please login or create an account</p>
+                </v-card-text>
+                <VCardActions style="margin-left: 40%">
+                    <v-btn color="primary" href="/login">Login</v-btn>
+                    <v-btn color="primary" href="/register">Signup</v-btn>
+                </VCardActions>
+            </div>
+        </VCard>
     </div>
 </v-app>
 </template>

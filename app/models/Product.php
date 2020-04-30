@@ -13,11 +13,11 @@ class Product extends Model
 {
     use SoftDeletes;
     public $with = ['skus', 'categories', 'brands', 'subcategories'];
-    public function sales()
-    {
-        return $this->belongsToMany(Sale::class);
-        // return $this->belongsToMany('App\models\Sale')->using('App\models\ProductSale');
-    }
+    // public function sales()
+    // {
+    //     return $this->belongsToMany(Sale::class);
+    //     // return $this->belongsToMany('App\models\Sale')->using('App\models\ProductSale');
+    // }
 
     public function categories()
     {

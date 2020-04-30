@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\Category;
+use App\models\Menu;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class CategoryController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('authCheck', ['except' => ['index', 'show', 'search_category']]);
+        $this->middleware('authCheck', ['except' => ['index', 'show', 'search_category', 'filter_category']]);
     }
 
 
@@ -95,5 +96,14 @@ class CategoryController extends Controller
     {
         $school = $request->school;
         return Category::where('category', 'Like', "%{$search}%")->paginate(300);
+    }
+
+    public function filter_category(Request $request)
+    {
+        // return $request->all();
+        $school_id = $request->school['id'];
+        $menu_id = $request->menus['id'];
+        // dd($school_id, $menu_id);
+        return Menu::find($menu_id)->categories;
     }
 }

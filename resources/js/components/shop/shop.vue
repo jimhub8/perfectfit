@@ -1,10 +1,10 @@
 <template>
-<div class="col-xs-12 col-md-12 shop-content">
+<div class="col-xs-12 col-md-9 shop-content">
     <div class="shop-banner">
-        <img src="https://d29u17ylf1ylz9.cloudfront.net/bege-v2/images/banner/shop-category.jpg" alt="">
+        <img src="/site/banner.jpg" alt="">
     </div>
     <div class="product-toolbar">
-        <div class="topbar-title">
+        <!-- <div class="topbar-title">
             <h1>Shop</h1>
         </div>
         <div class="product-toolbar-inner">
@@ -40,11 +40,11 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div> -->
         <div class="shop-page-product-area tab-content">
             <div id="grid" class="tab-pane fade in show active">
                 <div class="row">
-                    <div class="col-sm-6 col-md-4 col-xl-3" v-for="product in products.data" :key="product.id">
+                    <div class="col-sm-6 col-md-4 col-xl-3" v-for="product in menu.data" :key="product.id">
                         <div class="single-product-area">
                             <div class="product-wrapper gridview">
                                 <div class="list-col4">
@@ -61,15 +61,14 @@
                                 </div>
                                 <div class="list-col8">
                                     <div class="product-info">
-                                        <h2><a href="single-product.html">{{ product.product_name }}</a></h2>
-                                        <span class="price">
+                                        <h2><a href="#">{{ product.menu }}</a></h2>
+                                        <!-- <span class="price">
                                             <del>KES 85.00</del> KES {{ product.price }}
-                                        </span>
+                                        </span> -->
                                     </div>
-                                    <div class="product-hidden">
+                                    <!-- <div class="product-hidden">
                                         <div class="add-to-cart">
                                             <a  @click="addToCart(product)" style="cursor: pointer;">Add to cart</a>
-                                            <!-- <v-btn color="primary" @click="addToCart(product)">Add to cart</v-btn> -->
                                         </div>
                                         <div class="star-actions">
                                             <div class="product-rattings">
@@ -84,7 +83,7 @@
                                                 <li><a href=""><i class="ion-ios-shuffle-strong"></i></a></li>
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -94,11 +93,11 @@
             </div>
         </div>
     </div>
-    <nav class="woocommerce-pagination">
+    <!-- <nav class="woocommerce-pagination">
         <v-app>
             <v-pagination v-model="products.current_page" :length="products.last_page" total-visible="5" @input="next_page(products.path, products.current_page)" circle></v-pagination>
         </v-app>
-    </nav>
+    </nav> -->
     <myShow></myShow>
 </div>
 </template>
@@ -122,6 +121,20 @@ export default {
             this.$store.dispatch("filterItems", payload);
         },
 
+        getProduct_() {
+            var payload = {
+                model: '/products',
+                update_list: 'updateProductsList',
+            }
+            this.$store.dispatch("getItems", payload);
+        },
+        getMenu() {
+            var payload = {
+                model: '/menu',
+                update_list: 'updateMenuList',
+            }
+            this.$store.dispatch("getItems", payload);
+        },
         next_page(path, page) {
             var payload = {
                 path: path,
@@ -146,12 +159,16 @@ export default {
     computed: {
         products() {
             return this.$store.getters.products
-        }
+        },
+        menu() {
+            return this.$store.getters.menu;
+        },
     },
     mounted() {
-        console.log(this.$route.params.data);
+        // console.log(this.$route.params.data);
 
-        this.getProducts();
+        this.getProduct_();
+        // this.getProducts();
     },
 }
 </script>

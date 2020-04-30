@@ -24,4 +24,9 @@ class Category extends Model
     {
         return $this->belongsTo(Menu::class);
     }
+    public function sales()
+    {
+        return $this->belongsToMany(Sale::class);
+        // return $this->belongsToMany('App\models\Sale')->using('App\models\ProductSale');
+    }
 }

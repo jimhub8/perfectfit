@@ -36,6 +36,12 @@
                                 <el-input placeholder="Product name" v-model="form.product_name"></el-input>
                             </div>
                         </v-flex>
+                        <v-flex sm12>
+                            <div>
+                                <label for="">Product size</label>
+                                <el-input placeholder="32" v-model="form.size" type="number"></el-input>
+                            </div>
+                        </v-flex>
                     </v-layout>
                 </v-container>
             </v-card-text>

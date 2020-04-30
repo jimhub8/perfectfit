@@ -13,6 +13,8 @@ class Sku extends Model
         'price',
         'quantity',
         'reorder_point',
+        'size',
+        'description',
         'product_id',
     ];
     public function product()

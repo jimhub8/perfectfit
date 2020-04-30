@@ -25,13 +25,14 @@
                             <th class="column-2">Product</th>
                             <th class="column-3">Price</th>
                             <th class="column-4 p-l-70">Quantity</th>
-                            <th class="column-5">Total</th>
+                            <th class="column-5">Size</th>
+                            <th class="column-6">Total</th>
                         </tr>
 
                         <tr class="table-row" v-for="cart in carts" :key="cart.id">
                             <td class="column-1">
                                 <div class="cart-img-product b-rad-4 o-f-hidden" @click="flashCart(cart)">
-                                    <img style="width: 100px" :src="cart.product.image" alt="">
+                                    <!-- <img style="width: 100px" :src="cart.product.image" alt=""> -->
                                 </div>
                                 <div v-if="cart.attributes.length > 0">
                                     <div v-for="(attribute, index) in cart.attributes" :key="index">
@@ -39,7 +40,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="column-2">{{ cart.name.product_name }}</td>
+                            <td class="column-2">{{ cart.name }}</td>
                             <td class="column-3">{{ cart.price }}</td>
                             <td class="column-4">
                                 <div class="flex-w bo5 of-hidden w-size17">
@@ -52,7 +53,8 @@
                                     </v-btn>
                                 </div>
                             </td>
-                            <td class="column-5">{{ cart.price * cart.quantity }}</td>
+                            <td class="column-5">{{ cart.attributes.size }}</td>
+                            <td class="column-6">{{ cart.price * cart.quantity }}</td>
                         </tr>
                     </table>
 

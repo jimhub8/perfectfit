@@ -53,14 +53,14 @@
                                 <el-tag type="info">{{ props.row.sub_total }}</el-tag>
                             </span>
                         </span>
-                        <span v-else-if="props.column.field == 'discount'">
+                        <!-- <span v-else-if="props.column.field == 'discount'">
                             <span>
                                 <el-tag type="danger">{{ props.row.discount }}</el-tag>
                             </span>
-                        </span>
+                        </span> -->
                         <span v-else-if="props.column.field == 'total'">
                             <span>
-                                <el-tag>{{ props.row.total }}</el-tag>
+                                <el-tag>{{ props.row.total_price }}</el-tag>
                             </span>
                         </span>
                         <span v-else-if="props.column.field == 'actions'">
@@ -121,13 +121,13 @@ export default {
                     label: "Sub total",
                     field: "sub_total"
                 },
-                {
-                    label: "Discount",
-                    field: "discount"
-                },
+                // {
+                //     label: "Discount",
+                //     field: "discount"
+                // },
                 {
                     label: "Total",
-                    field: "total"
+                    field: "total_price"
                 },
                 {
                     label: "Created On",

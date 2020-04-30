@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Sale extends Model
 {
     use SoftDeletes;
-    public $with = ['products', 'ordershipping'];
+    public $with = ['ordershipping', 'categories'];
      /**
      * The users that belong to the role.
      */
-    public function products()
+    public function categories()
     {
-        return $this->belongsToMany('App\models\Product')->withPivot('quantity', 'price', 'sku_no', 'total_price');
+        return $this->belongsToMany(Category::class)->withPivot('quantity', 'price', 'sku_no', 'total_price');
         // return $this->belongsToMany('App\models\Product')->using('App\models\ProductSale');
     }
 

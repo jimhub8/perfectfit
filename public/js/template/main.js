@@ -754,7 +754,7 @@
      ScrollUp
     ---------------------------- */
     $.scrollUp({
-        scrollText: '<i class="ion-arrow-up-c"></i>',
+        scrollText: '<i data-v-6b4aeb57="" aria-hidden="true" class="v-icon notranslate material-icons theme--dark">keyboard_arrow_up</i>',
         easingType: 'linear',
         scrollSpeed: 900,
         animation: 'fade'

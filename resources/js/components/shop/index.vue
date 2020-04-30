@@ -1,17 +1,19 @@
 <template>
-<div class="row">
-    <!-- <mySidebar></mySidebar> -->
-    <myShop></myShop>
+<div>
+    <div class="row">
+        <mySidebar></mySidebar>
+        <myShop></myShop>
+    </div>
 </div>
 </template>
 
 <script>
 import myShop from './shop'
-// import mySidebar from './sidebar'
+import mySidebar from './sidebar'
 export default {
     components: {
         myShop,
-        // mySidebar,
+        mySidebar,
     },
 }
 </script>

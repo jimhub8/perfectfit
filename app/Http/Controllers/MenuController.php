@@ -6,6 +6,8 @@ use App\models\Menu;
 use App\models\SchoolMenu;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
@@ -77,6 +79,28 @@ class MenuController extends Controller
         //
     }
 
+
+    public function menu_image(Request $request, $id)
+    {
+        // dd($request->image);
+        $upload = Menu::find($id);
+        if ($request->hasFile('image')) {
+            $img = $request->image;
+            // dd($upload->image);
+            if (File::exists($upload->image)) {
+                // return ('test');
+                $image_path = $upload->image;
+                File::delete($image_path);
+            }
+            $imagename = Storage::disk('public')->put('menus', $img);
+            // return ('noop');
+            $imgArr = explode('/', $imagename);
+            $image_name = $imgArr[1];
+            $upload->image = '/storage/menus/' . $image_name;
+            $upload->save();
+            return $upload;
+        }
+    }
 
     public function search_menu(Request $request, $search)
     {

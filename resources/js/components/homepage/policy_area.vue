@@ -46,5 +46,24 @@
             </div>
         </div>
     </div>
+
+
+    <div class="container">
+        
+    </div>
+
 </div>
 </template>
+
+<style scoped>
+    .vc_row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.vc_custom_1498432229997 {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+    background-color: #12a4dd !important;
+}
+</style>

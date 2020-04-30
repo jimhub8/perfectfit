@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\AutoGenerate;
+use App\models\Category;
 use App\models\Drawer;
 use App\models\ProductSale;
 use App\models\Sale;
@@ -25,7 +26,7 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sales = Sale::with('user')->paginate(500);
+        return $sales = Sale::with('user')->paginate(500);
         $sales->transform(function($sale) {
             $sale->discount = ($sale->discount != null) ? $sale->discount : 0;
             $total = 0;
@@ -172,21 +173,27 @@ class SaleController extends Controller
             $sale->payment_id = $payment->id;
             $sale->paypal = $payment;
         }
+
         $sale->save();
+
         foreach ($carts as $cart) {
-            $sku_id = Sku::where('sku_no', $cart->name['sku_no'])->first('id');
+            $category_id = Category::where('category', $cart->name)->first('id')->id;
+            // $category_id = Category::findByCategory($cart->name);
+            // dd($category_id);
+            // $sku_id = Sku::where('sku_no', $cart->name['sku_no'])->first('id');
             // dd($sku_id['id']);
-            $sku_id = $sku_id['id'];
+            // $sku_id = $sku_id['id'];
             // if (!$sku_id) {
             //     dd($sku_id, $cart);
 
             // }
             $product_sale = new ProductSale;
             $product_sale->sale_id = $sale->id;
-            $product_sale->product_id = $cart->name['id'];
-            $product_sale->seller_id = $cart->name['seller_id'];
-            $product_sale->sku_id = $sku_id;
-            $product_sale->sku_no =  $cart->name['sku_no'];
+            // $product_sale->product_id = $cart->name['id'];
+            $product_sale->seller_id = 1;
+            // $product_sale->sku_id = $sku_id;
+            $product_sale->category_id = $category_id;
+            // $product_sale->sku_no =  $cart->name['sku_no'];
             $product_sale->price = $cart->price;
             $product_sale->quantity = $cart->quantity;
             $product_sale->total_price = $cart->price * $cart->quantity;

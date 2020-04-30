@@ -86,24 +86,26 @@
                         <!-- shop-cart-menu -->
                         <div class="shop-cart-menu pull-right">
                             <ul>
-                                <li>
-                                    <!-- <div class="blink"><span>blinking text</span></div> -->
+                                <!-- <li>
                                     <v-btn rounded  @click="openStepper" text style="border: 1px solid #fff; padding: 0 16px 45px 0;color: #fff;">
-                                    <!-- <el-button type="primary" @click="openStepper" plain class="blink"> -->
                                         <svg width="80px"  class="pulse" x="0px" y="0px"  viewBox="0 0 100 100">
                                             <circle class="pulse-disk" cx="50" cy="50" />
                                             <circle class="pulse-circle" cx="50" cy="50" stroke-width="2" />
                                             <circle class="pulse-circle-2" cx="50" cy="50" stroke-width="2" />
                                         </svg>
                                         <small style="margin-top: -17px;">Place an order</small>
-                                    <!-- </el-button> -->
                                     </v-btn>
+                                </li> -->
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-random"></i>
+                                    </a>
                                 </li>
-                                <!-- <li>
-                                    <a href="wishlist.html">
+                                <li>
+                                    <a href="#">
                                         <i class="fa fa-heart"></i>
                                     </a>
-                                </li> -->
+                                </li>
                                 <li>
                                     <a href="#">
                                         <span class="cart-icon">
@@ -129,7 +131,7 @@
                                                 </div>
                                                 <div class="shop-cart-info">
                                                     <h5>
-                                                        <a href="cart.html">{{ cart_item.name.product_name }}</a>
+                                                        <a href="#">{{ cart_item.name }}</a>
                                                     </h5>
                                                     <span class="price">KSH {{ cart_item.price }}</span>
                                                     <span class="quantaty">Qty: {{ cart_item.quantity }}</span>
@@ -169,7 +171,7 @@
         <div class="header-bottom-area">
             <div style="margin-left: 15px">
                 <div class="row">
-                    <div class="col-xl-3 col-lg-3 hidden-md hidden-sm pull-left category-wrapper">
+                    <!-- <div class="col-xl-3 col-lg-3 hidden-md hidden-sm pull-left category-wrapper">
                         <div class="categori-menu">
                             <span class="categorie-title">
                                 <i class="fa fa-bars"></i>Categories
@@ -179,14 +181,11 @@
                                     <li v-for="menu in menu.data" :key="menu.id">
                                         <a href="#">
                                             <span>
-                                                <!-- <img src="storage/images/icons/1.png" alt="menu-icon"> -->
                                             </span>
                                             {{ menu.menu }}
                                             <i class="fa fa-angle-right" aria-hidden="true"></i>
                                         </a>
-                                        <!-- categori Mega-Menu Start -->
                                         <ul class="ht-dropdown megamenu first-megamenu" v-for="category in menu.categories" :key="category.id">
-                                            <!-- Single Column Start -->
                                             <li class="single-megamenu">
                                                 <ul>
                                                     <li class="menu-tile">{{ category.category }}</li>
@@ -195,16 +194,13 @@
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <!-- Single Column End -->
                                         </ul>
-                                        <!-- categori Mega-Menu End -->
                                     </li>
                                 </ul>
                             </nav>
                         </div>
-                    </div>
-                    <div class="col-lg-9">
-                        <!-- main-menu -->
+                    </div> -->
+                    <!-- <div class="col-lg-9">
                         <div class="main-menu">
                             <nav>
                                 <ul>
@@ -225,7 +221,7 @@
                                 </nav>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -309,15 +305,15 @@ export default {
         },
         addToCart(cart) {
             eventBus.$emit("progressEvent");
-            // console.log(cart);
+            console.log(cart);
             // eventBus.$emit("progressEvent");
             var payload = {
                 model: "cartAdd",
-                id: cart.id,
+                // id: cart.id,
                 data: cart
             };
 
-            this.$store.dispatch("postItem", payload).then(res => {
+            this.$store.dispatch("postItems", payload).then(res => {
                 this.getCart();
                 this.get_cart_total();
                 this.get_cart_count();
