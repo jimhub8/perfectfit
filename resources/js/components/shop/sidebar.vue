@@ -74,7 +74,7 @@
         </div>
         <div class="sidebar-single-banner">
             <a href="#">
-                <img src="http://demo.roadthemes.com/bege/wp-content/uploads/2017/06/shop-sidebar.jpg" alt="Banner">
+                <img src="/site//shop-sidebar.jpg" alt="Banner">
             </a>
         </div>
     </div>

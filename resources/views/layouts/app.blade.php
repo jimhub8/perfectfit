@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" type="image/png" href="/site/favicon.png" />
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -15,37 +17,20 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.0.0/collection/components/icon/icon.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.0.0/collection/components/icon/icon.min.css">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 
-    {{-- <link href="{{ asset('css/template/bundle.css') }}" rel="stylesheet"> --}}
-    <link href="{{ asset('css/template/colors.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/template/css-plugins-call.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/template/ionicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/template/main.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/template/responsive.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('css/template/font-awesome.min.css') }}" rel="stylesheet"> --}}
-    <link href="{{ asset('css/template/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
 
     {{-- Slider --}}
-<link rel="stylesheet" href="http://dellmat.jim/css/util.css">
-<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="{{ asset('css/slider/default/default.css') }}" type="text/css"  />
-<link rel="stylesheet" href="{{ asset('css/slider/light/light.css') }}" type="text/css"  />
-<link rel="stylesheet" href="{{ asset('css/slider/dark/dark.css') }}" type="text/css"  />
-<link rel="stylesheet" href="{{ asset('css/slider/bar/bar.css') }}" type="text/css"  />
-<link rel="stylesheet" href="{{ asset('css/nivo-slider.css') }}" type="text/css"  />
-<link rel="stylesheet" href="{{ asset('css/slider/style.css') }}" type="text/css"  />
-    {{-- <link href="{{ asset('css/template/nivo-slider.css') }}" rel="stylesheet"> --}}
-    {{-- Slider --}}
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> --}}
 
 
 </head>
+
 <body>
     <div id="app">
         <main class="py-4" style="padding: 0 0 0 1px !important;">
@@ -60,16 +45,15 @@
 
 
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="{{ asset('js/slider/jquery.nivo.slider.js') }}" defer></script>
-<script type="text/javascript">
-    $(window).load(function() {
+    <script type="text/javascript">
+        $(window).load(function() {
         $('#slider').nivoSlider();
     });
     </script>
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-36251023-1']);
   _gaq.push(['_setDomainName', 'jqueryscript.net']);
   _gaq.push(['_trackPageview']);
@@ -80,10 +64,10 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-</script>
+    </script>
 
-<script type="text/javascript">
-    $(window).load(function() {
+    <script type="text/javascript">
+        $(window).load(function() {
     $('#slider').nivoSlider({
     effect: 'random',
     slices: 15,
@@ -109,4 +93,5 @@
     });
     </script>
 </body>
+
 </html>

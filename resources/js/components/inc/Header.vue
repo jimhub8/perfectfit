@@ -65,13 +65,13 @@
         <div class="header-middle-area">
             <div style="padding: 0 10px">
                 <div class="row">
-                    <div class="col-xl-1 col-md-6">
+                    <div class="col-xl-2 col-md-6">
                         <!-- site-logo -->
                         <div class="site-logo">
-                            <router-link to="/"><img src="/logo/logo.png" alt="Perfectfit" /></router-link>
+                            <router-link to="/"><img src="/site/logo/logo.png" alt="Perfectfit" /></router-link>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-md-12">
+                    <div class="col-xl-4 col-md-12">
                         <!-- header-search -->
                         <div class="header-search clearfix">
                             <div class="header-search-form">

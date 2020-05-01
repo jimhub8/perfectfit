@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <div class="vc_row wpb_row vc_row-fluid footer-policy vc_custom_1495701232016">
+    <div class="vc_row wpb_row vc_row-fluid footer-policy vc_custom_1495701232016" id="icons">
         <div class="row-container">
             <div class="wpb_column vc_column_container vc_col-sm-6 vc_col-lg-3 vc_col-md-3 vc_col-xs-6">
                 <div class="vc_column-inner ">
@@ -116,7 +116,8 @@
             <div class="row">
                 <div class="col-sm-6 col-lg-3 col-md-3 col-xs-12">
                     <div class="footer-logo-area">
-                        <a href="#"><img src="https://d29u17ylf1ylz9.cloudfront.net/bege-v2/images/logo/logo-black.png" alt="footer logo"></a>
+                        <a href="#">
+                            <img src="/site/logo/logo.png" alt="footer logo"></a>
                         <div class="footer-menu">
                             <ul>
                                 <li><a href="#">About Us</a></li>
@@ -206,7 +207,9 @@ export default {
     width: 65% !important;
 }
 
-.fa {
+#icons .fa {
+    margin-bottom: 15px;
     color: rgb(18, 164, 221);
 }
+
 </style>
