@@ -8,7 +8,8 @@
             </el-select>
         </div>
         <div style="margin: 20px 0;"></div>
-        <div v-if="form.menus.menu == 'School uniform'">
+        <div>
+        <!-- <div v-if="form.menus.menu == 'School uniform'"> -->
             <label for="">School</label>
             <el-select v-model="form.school" filterable remote reserve-keyword placeholder="Please enter a keyword" :remote-method="schoolSearch" :loading="loading" style="width: 100%" value-key="id">
                 <el-option v-for="item in schools.data" :key="item.id" :label="item.name" :value="item">
