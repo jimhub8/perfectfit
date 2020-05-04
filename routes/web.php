@@ -46,7 +46,7 @@ Route::resource('currencies', 'CurrencyController');
 Route::resource('order_address', 'OrdershippingController');
 
 
-Route::post('/search_category/{search}', 'CategoryController@search_category')->name('search_category');
+Route::get('/search_category/{search}', 'CategoryController@search_category')->name('search_category');
 Route::post('/search_menu/{search}', 'MenuController@search_menu')->name('search_menu');
 
 

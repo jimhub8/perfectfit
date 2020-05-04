@@ -10,6 +10,7 @@
 
 <script>
 export default {
+    name: 'step2',
     props: ['form'],
     methods: {},
     computed: {

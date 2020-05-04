@@ -5,7 +5,7 @@
             <v-stepper-header>
                 <v-stepper-step :complete="e1 > 1" step="1">School & Category</v-stepper-step>
                 <v-divider></v-divider>
-                <v-stepper-step :complete="e1 > 2" step="2">Size</v-stepper-step>
+                <v-stepper-step :complete="e1 > 2" step="2">Available</v-stepper-step>
                 <v-divider></v-divider>
                 <v-stepper-step :complete="e1 > 3" step="3">Confirm</v-stepper-step>
                 <v-divider></v-divider>
@@ -77,6 +77,7 @@ import Step1 from './steps/Step1'
 import Step2 from './steps/Step2'
 import Step4 from './steps/Step4'
 export default {
+    name: 'Buysteps',
     components: {
         Step1,
         Step2,
@@ -139,8 +140,11 @@ export default {
             }
             this.$store.dispatch("filterItems", payload).then((res) => {
                 console.log(this.categories);
+                // this.form.category_arr.push('Shirts')
             })
             this.e1 = 2
+
+            console.log(this.form.category_arr)
         },
         GoToStep3() {
             this.e1 = 3
@@ -151,12 +155,19 @@ export default {
                     size: '',
                 })
             });
+            console.log(this.form.category_arr)
         }
     },
     created() {
         eventBus.$on('openSteppsEvent', data => {
             this.dialog = true
             this.getMenu()
+        })
+
+        eventBus.$on('SearchMenuEvent', data => {
+            this.dialog = true
+            this.getMenu()
+            this.form.menus = data
         })
     },
     computed: {

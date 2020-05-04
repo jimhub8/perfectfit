@@ -28,7 +28,7 @@
                 <small style="margin-top: -17px;">Place an order</small>
             </v-btn>
         </div>
-        <VDivider/>
+        <VDivider />
         <div class="widget-title">
             <h3>CATEGORIES</h3>
         </div>
@@ -50,11 +50,14 @@
             <el-collapse accordion>
                 <el-collapse-item v-for="(menu, index) in menus.data" :key="menu.id" :name="index">
                     <template slot="title">
-                        {{ menu.menu }}
+
+                        <!-- <div @click="handleChange(menu)"> -->
+                            {{ menu.menu }}
+                        <!-- </div> -->
                         <!-- <i class="header-icon el-icon-info"></i> -->
                     </template>
                     <ul class="list-group">
-                        <li class="list-group-item" v-for="category in menu.categories" :key="category.id">{{ category.category }}</li>
+                        <li class="list-group-item" div @click="handleChange(menu)" v-for="category in menu.categories" :key="category.id" style="cursor: pointer">{{ category.category }}</li>
                     </ul>
                 </el-collapse-item>
             </el-collapse>
@@ -84,9 +87,14 @@
 <script>
 export default {
     methods: {
-
         openStepper() {
             eventBus.$emit("openSteppsEvent");
+        },
+        handleChange(data) {
+            console.log(data);
+
+            eventBus.$emit('SearchMenuEvent', data)
+
         },
     },
     computed: {

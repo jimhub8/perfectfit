@@ -75,10 +75,19 @@
                         <!-- header-search -->
                         <div class="header-search clearfix">
                             <div class="header-search-form">
-                                <form action="#">
+
+                                <div>
+                                    <!-- <div v-if="form.menus.menu == 'School uniform'"> -->
+                                    <el-select v-model="form.menu" filterable remote reserve-keyword placeholder="Please enter a keyword" :remote-method="categorySearch" :loading="loading" style="width: 100%" @change="handleChange" value-key="id">
+                                        <el-option v-for="item in menu.data" :key="item.id" :label="item.menu" :value="item">
+                                        </el-option>
+                                    </el-select>
+                                </div>
+                                <!-- <form action="#">
                                     <input type="text" name="search" placeholder="Search product..." style="width: 100%" />
-                                    <input type="submit" name="submit" value="Search" />
-                                </form>
+                                    <VBtn style="padding: 0 42px;height: 52px;position: absolute;right: 0;top: 0;border-radius: 0 5px 5px 0;font-size: 14px;font-weight: 300;" text @click="search">Search</VBtn>
+                                </form> -->
+
                             </div>
                         </div>
                     </div>
@@ -168,63 +177,7 @@
         </div>
         <!-- Header middle area end -->
         <!-- Header bottom area start -->
-        <div class="header-bottom-area">
-            <div style="margin-left: 15px">
-                <div class="row">
-                    <!-- <div class="col-xl-3 col-lg-3 hidden-md hidden-sm pull-left category-wrapper">
-                        <div class="categori-menu">
-                            <span class="categorie-title">
-                                <i class="fa fa-bars"></i>Categories
-                            </span>
-                            <nav>
-                                <ul class="categori-menu-list menu-hidden">
-                                    <li v-for="menu in menu.data" :key="menu.id">
-                                        <a href="#">
-                                            <span>
-                                            </span>
-                                            {{ menu.menu }}
-                                            <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                        </a>
-                                        <ul class="ht-dropdown megamenu first-megamenu" v-for="category in menu.categories" :key="category.id">
-                                            <li class="single-megamenu">
-                                                <ul>
-                                                    <li class="menu-tile">{{ category.category }}</li>
-                                                    <li v-for="subcat in category.subcategories" :key="subcat.id">
-                                                        <a href="#">{{ subcat.subcategory }}</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div> -->
-                    <!-- <div class="col-lg-9">
-                        <div class="main-menu">
-                            <nav>
-                                <ul>
-                                    <li class="current">
-                                        <router-link to="/">Home</router-link>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <div class="mobile-menu-area">
-                            <div class="mobile-menu">
-                                <nav id="mobile-menu-active" style="display: block;">
-                                    <ul class="menu-overflow">
-                                        <li>
-                                            <router-link to="/">Home</router-link>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
-            </div>
-        </div>
+
         <!-- Header bottom area end -->
     </header>
 </div>
@@ -236,7 +189,7 @@ export default {
     props: ["user"],
     data() {
         return {
-
+            form: {},
             csrf: document
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"),
@@ -246,6 +199,23 @@ export default {
         myStepper
     },
     methods: {
+        handleChange(data) {
+            console.log(data);
+
+            eventBus.$emit('SearchMenuEvent', data)
+
+        },
+
+        categorySearch(search) {
+            if (search.length > 2) {
+                var payload = {
+                    'model': '/search_category',
+                    'update': 'updateCategoryList',
+                    'search': search,
+                }
+            }
+            this.$store.dispatch('searchItems', payload)
+        },
         openStepper() {
             eventBus.$emit("openSteppsEvent");
         },
@@ -368,6 +338,9 @@ export default {
         },
         cart_total() {
             return this.$store.getters.cart_total;
+        },
+        loading() {
+            return this.$store.getters.loading;
         }
     },
     created() {
@@ -427,7 +400,6 @@ svg:nth-child(1) .pulse-circle,
 svg:nth-child(1) .pulse-circle-2 {
     stroke: rgb(45, 220, 150);
 }
-
 
 .pulse-circle,
 .pulse-circle-2 {
